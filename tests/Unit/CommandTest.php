@@ -1,9 +1,9 @@
 <?php
 
-namespace mishagp\OCRmyPDF\Tests\Unit;
+namespace mishahawthorn\OCRmyPDF\Tests\Unit;
 
-use mishagp\OCRmyPDF\Command;
-use mishagp\OCRmyPDF\OCRmyPDF;
+use mishahawthorn\OCRmyPDF\Command;
+use mishahawthorn\OCRmyPDF\OCRmyPDF;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 use function PHPUnit\Framework\assertEquals;

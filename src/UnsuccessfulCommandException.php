@@ -1,7 +1,7 @@
 <?php
 
 
-namespace mishagp\OCRmyPDF;
+namespace mishahawthorn\OCRmyPDF;
 
 
 class UnsuccessfulCommandException extends OCRmyPDFException

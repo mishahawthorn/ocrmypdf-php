@@ -1,16 +1,16 @@
 <?php
 
 
-namespace mishagp\OCRmyPDF\Tests\E2E;
+namespace mishahawthorn\OCRmyPDF\Tests\E2E;
 
 
-use mishagp\OCRmyPDF\Command;
-use mishagp\OCRmyPDF\NoWritePermissionsException;
-use mishagp\OCRmyPDF\OCRmyPDF;
-use mishagp\OCRmyPDF\OCRmyPDFException;
-use mishagp\OCRmyPDF\Process;
-use mishagp\OCRmyPDF\Tests\Helpers;
-use mishagp\OCRmyPDF\UnsuccessfulCommandException;
+use mishahawthorn\OCRmyPDF\Command;
+use mishahawthorn\OCRmyPDF\NoWritePermissionsException;
+use mishahawthorn\OCRmyPDF\OCRmyPDF;
+use mishahawthorn\OCRmyPDF\OCRmyPDFException;
+use mishahawthorn\OCRmyPDF\Process;
+use mishahawthorn\OCRmyPDF\Tests\Helpers;
+use mishahawthorn\OCRmyPDF\UnsuccessfulCommandException;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 use function PHPUnit\Framework\assertFileExists;

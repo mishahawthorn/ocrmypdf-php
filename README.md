@@ -2,17 +2,17 @@
 
 A simple PHP wrapper for OCRmyPDF
 
-[![Latest Stable Version](http://poser.pugx.org/mishagp/ocrmypdf/v)](https://packagist.org/packages/mishagp/ocrmypdf)
-[![Total Downloads](http://poser.pugx.org/mishagp/ocrmypdf/downloads)](https://packagist.org/packages/mishagp/ocrmypdf)
-[![License](http://poser.pugx.org/mishagp/ocrmypdf/license)](https://packagist.org/packages/mishagp/ocrmypdf)
-[![PHP Version Require](http://poser.pugx.org/mishagp/ocrmypdf/require/php)](https://packagist.org/packages/mishagp/ocrmypdf)
-[![codecov](https://codecov.io/gh/mishagp/ocrmypdf-php/graph/badge.svg?token=F3CU9T8LJU)](https://codecov.io/gh/mishagp/ocrmypdf-php)
+[![Latest Stable Version](http://poser.pugx.org/mishahawthorn/ocrmypdf/v)](https://packagist.org/packages/mishahawthorn/ocrmypdf)
+[![Total Downloads](http://poser.pugx.org/mishahawthorn/ocrmypdf/downloads)](https://packagist.org/packages/mishahawthorn/ocrmypdf)
+[![License](http://poser.pugx.org/mishahawthorn/ocrmypdf/license)](https://packagist.org/packages/mishahawthorn/ocrmypdf)
+[![PHP Version Require](http://poser.pugx.org/mishahawthorn/ocrmypdf/require/php)](https://packagist.org/packages/mishahawthorn/ocrmypdf)
+[![codecov](https://codecov.io/gh/mishahawthorn/ocrmypdf-php/graph/badge.svg?token=F3CU9T8LJU)](https://codecov.io/gh/mishahawthorn/ocrmypdf-php)
 
 ## Installation
 
 Via [Composer][]:
 
-    $ composer require mishagp/ocrmypdf
+    $ composer require mishahawthorn/ocrmypdf
 
 **This library depends on [OCRmyPDF][].** Please see the GitHub repository for instructions on how to install OCRmyPDF
 on your platform.
@@ -22,7 +22,7 @@ on your platform.
 ### Basic example
 
 ```php
-use mishagp\OCRmyPDF\OCRmyPDF;
+use mishahawthorn\OCRmyPDF\OCRmyPDF;
 
 //Return file path of outputted, OCRed PDF
 echo OCRmyPDF::make('document.pdf')->run();
@@ -41,7 +41,7 @@ Define invocation parameters for `ocrmypdf`. See `ocrmypdf --help` for a list of
 > Parameters configured via `setParam` will override any other parameters or configurations set otherwise.
 
 ```php
-use mishagp\OCRmyPDF\OCRmyPDF;
+use mishahawthorn\OCRmyPDF\OCRmyPDF;
 
 //Passing a single parameter with a value
 OCRmyPDF::make('document_zh-CN.pdf')
@@ -65,7 +65,7 @@ OCRmyPDF::make('document_withoutAttribution.pdf')
 Pass image/PDF data loaded in memory into `ocrmypdf` directly via stdin.
 
 ```php
-use mishagp\OCRmyPDF\OCRmyPDF;
+use mishahawthorn\OCRmyPDF\OCRmyPDF;
 
 //Using Imagick
 $data = $img->getImageBlob();
@@ -87,7 +87,7 @@ OCRmyPDF::make()
 Specify a writable path where `ocrmypdf` should generate output PDF.
 
 ```php
-use mishagp\OCRmyPDF\OCRmyPDF;
+use mishahawthorn\OCRmyPDF\OCRmyPDF;
 OCRmyPDF::make('document.pdf')
     ->setOutputPDFPath('/outputDir/ocr_document.pdf')
     ->run();
@@ -98,7 +98,7 @@ OCRmyPDF::make('document.pdf')
 Define a custom location of the `ocrmypdf` executable, if by any reason it is not present in the `$PATH`.
 
 ```php
-use mishagp\OCRmyPDF\OCRmyPDF;
+use mishahawthorn\OCRmyPDF\OCRmyPDF;
 OCRmyPDF::make('document.pdf')
     ->setExecutable('/path/to/ocrmypdf')
     ->run();
@@ -117,7 +117,7 @@ developed by [thiagoalessio][] and associated contributors.
 
 [OCRmyPDF]: https://github.com/jbarlow83/OCRmyPDF
 
-[AGPL-3.0 License]: https://github.com/mishagp/ocrmypdf-php/blob/main/LICENSE
+[AGPL-3.0 License]: https://github.com/mishahawthorn/ocrmypdf-php/blob/main/LICENSE
 
 [tesseract-ocr-for-php]: https://github.com/thiagoalessio/tesseract-ocr-for-php
 

@@ -1,5 +1,5 @@
 {
-  "name": "mishagp/ocrmypdf",
+  "name": "mishahawthorn/ocrmypdf",
   "description": "A simple PHP wrapper for OCRmyPDF",
   "type": "library",
   "keywords": [
@@ -11,13 +11,13 @@
   "license": "AGPL-3.0-only",
   "authors": [
     {
-      "name": "mishagp",
-      "email": "misha@mishaprasolov.com"
+      "name": "mishahawthorn",
+      "email": "inbox@heymisha.com"
     }
   ],
   "support": {
-    "issues": "https://github.com/mishagp/ocrmypdf-php/issues",
-    "source": "https://github.com/mishagp/ocrmypdf-php"
+    "issues": "https://github.com/mishahawthorn/ocrmypdf-php/issues",
+    "source": "https://github.com/mishahawthorn/ocrmypdf-php"
   },
   "require": {
     "php": "^8.0"
@@ -31,12 +31,12 @@
   },
   "autoload": {
     "psr-4": {
-      "mishagp\\OCRmyPDF\\": "src/"
+      "mishahawthorn\\OCRmyPDF\\": "src/"
     }
   },
   "autoload-dev": {
     "psr-4": {
-      "mishagp\\OCRmyPDF\\Tests\\": "tests/"
+      "mishahawthorn\\OCRmyPDF\\Tests\\": "tests/"
     }
   },
   "config": {

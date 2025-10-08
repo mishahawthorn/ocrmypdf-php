@@ -1,10 +1,10 @@
 <?php
 
-namespace mishagp\OCRmyPDF\Tests\Unit;
+namespace mishahawthorn\OCRmyPDF\Tests\Unit;
 
 use InvalidArgumentException;
-use mishagp\OCRmyPDF\Process;
-use mishagp\OCRmyPDF\UnsuccessfulCommandException;
+use mishahawthorn\OCRmyPDF\Process;
+use mishahawthorn\OCRmyPDF\UnsuccessfulCommandException;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 use ReflectionClass;

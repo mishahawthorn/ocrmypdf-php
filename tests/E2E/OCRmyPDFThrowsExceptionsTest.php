@@ -1,17 +1,17 @@
 <?php
 
 
-namespace mishagp\OCRmyPDF\Tests\E2E;
+namespace mishahawthorn\OCRmyPDF\Tests\E2E;
 
 
-use mishagp\OCRmyPDF\Command;
-use mishagp\OCRmyPDF\FileNotFoundException;
-use mishagp\OCRmyPDF\NoWritePermissionsException;
-use mishagp\OCRmyPDF\OCRmyPDF;
-use mishagp\OCRmyPDF\OCRmyPDFException;
-use mishagp\OCRmyPDF\OCRmyPDFNotFoundException;
-use mishagp\OCRmyPDF\Process;
-use mishagp\OCRmyPDF\UnsuccessfulCommandException;
+use mishahawthorn\OCRmyPDF\Command;
+use mishahawthorn\OCRmyPDF\FileNotFoundException;
+use mishahawthorn\OCRmyPDF\NoWritePermissionsException;
+use mishahawthorn\OCRmyPDF\OCRmyPDF;
+use mishahawthorn\OCRmyPDF\OCRmyPDFException;
+use mishahawthorn\OCRmyPDF\OCRmyPDFNotFoundException;
+use mishahawthorn\OCRmyPDF\Process;
+use mishahawthorn\OCRmyPDF\UnsuccessfulCommandException;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 
