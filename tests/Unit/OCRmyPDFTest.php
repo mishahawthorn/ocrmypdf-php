@@ -1,12 +1,12 @@
 <?php
 
-namespace mishagp\OCRmyPDF\Tests\Unit;
+namespace mishahawthorn\OCRmyPDF\Tests\Unit;
 
-use mishagp\OCRmyPDF\Command;
-use mishagp\OCRmyPDF\FileNotFoundException;
-use mishagp\OCRmyPDF\NoWritePermissionsException;
-use mishagp\OCRmyPDF\OCRmyPDF;
-use mishagp\OCRmyPDF\OCRmyPDFNotFoundException;
+use mishahawthorn\OCRmyPDF\Command;
+use mishahawthorn\OCRmyPDF\FileNotFoundException;
+use mishahawthorn\OCRmyPDF\NoWritePermissionsException;
+use mishahawthorn\OCRmyPDF\OCRmyPDF;
+use mishahawthorn\OCRmyPDF\OCRmyPDFNotFoundException;
 use PHPUnit\Framework\Assert;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
