@@ -29,7 +29,7 @@ jobs:
         run: php -dxdebug.mode=coverage ./vendor/phpunit/phpunit/phpunit --coverage-clover ./coverage.xml --configuration ./phpunit.xml
 
       - name: Upload to Codecov
-        uses: codecov/codecov-action@v5
+        uses: codecov/codecov-action@v6
         with:
           files: ./coverage.xml
           verbose: true
