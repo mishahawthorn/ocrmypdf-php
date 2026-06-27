@@ -211,10 +211,18 @@ class Command
         return $this->tempDir !== null ? $this->tempDir : sys_get_temp_dir();
     }
 
+    /**
+     * @throws UnsuccessfulCommandException When the executable cannot be launched.
+     */
     public function getOCRmyPDFVersion(): string
     {
-        exec(self::escape($this->executable) . ' --version 2>&1', $output);
-        return (string)reset($output);
+        $process = new Process([$this->executable, '--version']);
+        $output = $process->wait();
+        $process->closeStreams()->closeHandle();
+
+        $combined = $output["out"] !== '' ? $output["out"] : $output["err"];
+        $firstLine = strtok($combined, "\n");
+        return $firstLine === false ? '' : trim($firstLine);
     }
 
     public static function escape(string $str): string

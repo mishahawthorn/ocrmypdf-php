@@ -308,6 +308,9 @@ class OCRmyPDF
      */
     public function language(string ...$languages): self
     {
+        if ($languages === []) {
+            throw new InvalidArgumentException("At least one language must be provided");
+        }
         return $this->setParam('-l', implode('+', $languages));
     }
 
@@ -400,11 +403,14 @@ class OCRmyPDF
      * Write the recognized plaintext to a sidecar file and make it available
      * via getText() after run(). Pass a path to keep the file, or null to use a
      * temporary file that is read and then discarded.
+     *
+     * @throws NoWritePermissionsException When a supplied path is not writable.
      */
     public function extractText(?string $sidecarPath = null): self
     {
         $this->command->useSidecar = true;
         if ($sidecarPath !== null) {
+            self::checkWritePermissions($sidecarPath);
             $this->command->sidecarPath = $sidecarPath;
             $this->command->generatedSidecarPath = false;
         }
@@ -443,6 +449,8 @@ class OCRmyPDF
 
     /**
      * Return the version string reported by the OCRmyPDF executable.
+     *
+     * @throws UnsuccessfulCommandException When the executable cannot be launched.
      */
     public function version(): string
     {

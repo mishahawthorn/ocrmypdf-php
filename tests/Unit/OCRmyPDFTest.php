@@ -64,6 +64,12 @@ class OCRmyPDFTest extends TestCase
         OCRmyPDF::make('in.pdf')->optimize(9);
     }
 
+    public function testLanguageRequiresAtLeastOne(): void
+    {
+        $this->expectException(InvalidArgumentException::class);
+        OCRmyPDF::make('in.pdf')->language();
+    }
+
     public function testSetThreadLimitAndTempDir(): void
     {
         $instance = OCRmyPDF::make('in.pdf')
