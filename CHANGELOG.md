@@ -2,11 +2,24 @@
 
 All notable changes to `ocrmypdf-php` will be documented in this file
 
+## v2.0.0 - 2026-06-27
+
+### What's Changed
+
+* Bump actions/checkout from 5 to 6 by @dependabot[bot] in https://github.com/mishahawthorn/ocrmypdf-php/pull/16
+* Bump codecov/codecov-action from 5 to 6 by @dependabot[bot] in https://github.com/mishahawthorn/ocrmypdf-php/pull/17
+* Bump stefanzweifel/git-auto-commit-action from 6 to 7 by @dependabot[bot] in https://github.com/mishahawthorn/ocrmypdf-php/pull/15
+* Bump codecov/codecov-action from 6 to 7 by @dependabot[bot] in https://github.com/mishahawthorn/ocrmypdf-php/pull/18
+* Bump actions/checkout from 6 to 7 by @dependabot[bot] in https://github.com/mishahawthorn/ocrmypdf-php/pull/19
+* Add tests, update dependencies, and change license by @mishahawthorn in https://github.com/mishahawthorn/ocrmypdf-php/pull/20
+
+**Full Changelog**: https://github.com/mishahawthorn/ocrmypdf-php/compare/v1.0.0...v2.0.0
+
 ## Unreleased
 
 > [!IMPORTANT]
-> The license changed from **AGPL-3.0-only** to **MIT**. This release also raises the minimum PHP version and
-> changes internal `Process`/`Command` signatures, so it is a major (breaking) release.
+The license changed from **AGPL-3.0-only** to **MIT**. This release also raises the minimum PHP version and
+changes internal `Process`/`Command` signatures, so it is a major (breaking) release.
 
 ### License
 
@@ -68,6 +81,7 @@ Replace the old package name with the new one in your project's `composer.json`:
   }
 }
 
+
 ```
 ##### Step 2: Update your dependencies
 
@@ -76,12 +90,14 @@ Run the following command to update your dependencies:
 ```shell
 composer update mishahawthorn/ocrmypdf
 
+
 ```
 Alternatively, you can remove the old package and require the new one:
 
 ```shell
 composer remove mishagp/ocrmypdf
 composer require mishahawthorn/ocrmypdf
+
 
 ```
 ##### Step 3: Update namespace imports (if applicable)
@@ -95,6 +111,7 @@ use mishagp\OCRmyPDF\OCRmyPDF;
 // New
 use mishahawthorn\OCRmyPDF\OCRmyPDF;
 
+
 ```
 **Note:** If the namespace was already `mishahawthorn` in previous versions, no code changes are required.
 
@@ -104,6 +121,7 @@ Clear your Composer cache to ensure you're pulling from the correct repository:
 
 ```shell
 composer clear-cache
+
 
 ```
 #### Compatibility
