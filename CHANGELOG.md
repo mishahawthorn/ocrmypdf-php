@@ -4,19 +4,6 @@ All notable changes to `ocrmypdf-php` will be documented in this file
 
 ## v2.0.0 - 2026-06-27
 
-### What's Changed
-
-* Bump actions/checkout from 5 to 6 by @dependabot[bot] in https://github.com/mishahawthorn/ocrmypdf-php/pull/16
-* Bump codecov/codecov-action from 5 to 6 by @dependabot[bot] in https://github.com/mishahawthorn/ocrmypdf-php/pull/17
-* Bump stefanzweifel/git-auto-commit-action from 6 to 7 by @dependabot[bot] in https://github.com/mishahawthorn/ocrmypdf-php/pull/15
-* Bump codecov/codecov-action from 6 to 7 by @dependabot[bot] in https://github.com/mishahawthorn/ocrmypdf-php/pull/18
-* Bump actions/checkout from 6 to 7 by @dependabot[bot] in https://github.com/mishahawthorn/ocrmypdf-php/pull/19
-* Add tests, update dependencies, and change license by @mishahawthorn in https://github.com/mishahawthorn/ocrmypdf-php/pull/20
-
-**Full Changelog**: https://github.com/mishahawthorn/ocrmypdf-php/compare/v1.0.0...v2.0.0
-
-## Unreleased
-
 > [!IMPORTANT]
 The license changed from **AGPL-3.0-only** to **MIT**. This release also raises the minimum PHP version and
 changes internal `Process`/`Command` signatures, so it is a major (breaking) release.
@@ -52,6 +39,8 @@ changes internal `Process`/`Command` signatures, so it is a major (breaking) rel
 * On failure, only internally generated temp files are deleted — a caller-supplied output path is never removed.
 * Recursive directory creation in `checkWritePermissions()`; orphaned `tempnam()` stub files are cleaned up.
 * Removed a duplicated cleanup block in temp-file handling.
+
+**Full Changelog**: https://github.com/mishahawthorn/ocrmypdf-php/compare/v1.0.0...v2.0.0
 
 ## v1.0.0 - 2025-10-08
 
