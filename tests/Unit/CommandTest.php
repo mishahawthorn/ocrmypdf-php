@@ -5,6 +5,7 @@ namespace mishahawthorn\OCRmyPDF\Tests\Unit;
 use mishahawthorn\OCRmyPDF\Command;
 use mishahawthorn\OCRmyPDF\NoWritePermissionsException;
 use mishahawthorn\OCRmyPDF\OCRmyPDF;
+use mishahawthorn\OCRmyPDF\Process;
 use mishahawthorn\OCRmyPDF\UnsuccessfulCommandException;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
@@ -15,6 +16,7 @@ use function PHPUnit\Framework\assertTrue;
 
 #[CoversClass(OCRmyPDF::class)]
 #[CoversClass(Command::class)]
+#[CoversClass(Process::class)]
 class CommandTest extends TestCase
 {
     public function testGetOCRmyPDFVersion(): void

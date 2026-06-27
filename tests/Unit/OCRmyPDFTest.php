@@ -7,6 +7,7 @@ use mishahawthorn\OCRmyPDF\FileNotFoundException;
 use mishahawthorn\OCRmyPDF\NoWritePermissionsException;
 use mishahawthorn\OCRmyPDF\OCRmyPDF;
 use mishahawthorn\OCRmyPDF\OCRmyPDFNotFoundException;
+use mishahawthorn\OCRmyPDF\Process;
 use InvalidArgumentException;
 use PHPUnit\Framework\Assert;
 use PHPUnit\Framework\Attributes\CoversClass;
@@ -22,6 +23,7 @@ use function PHPUnit\Framework\assertTrue;
 
 #[CoversClass(OCRmyPDF::class)]
 #[CoversClass(Command::class)]
+#[CoversClass(Process::class)]
 class OCRmyPDFTest extends TestCase
 {
     public function testConvenienceSettersPopulateParameters(): void
