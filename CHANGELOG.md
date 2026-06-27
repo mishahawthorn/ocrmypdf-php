@@ -2,6 +2,44 @@
 
 All notable changes to `ocrmypdf-php` will be documented in this file
 
+## Unreleased
+
+> [!IMPORTANT]
+> The license changed from **AGPL-3.0-only** to **MIT**. This release also raises the minimum PHP version and
+> changes internal `Process`/`Command` signatures, so it is a major (breaking) release.
+
+### License
+
+* Relicensed from `AGPL-3.0-only` to `MIT`. The previous AGPL terms continue to apply to releases up to and
+  including `v1.0.0`.
+
+### Added
+
+* **Text extraction** — `extractText()` / `getText()` capture the recognized plaintext via `--sidecar`.
+* **Convenience setters** — `language()`, `deskew()`, `rotatePages()`, `clean()`, `removeBackground()`,
+  `optimize()`, `forceOcr()`, `skipText()`, `redoOcr()`, `setThreadLimit()`, `setTempDir()`.
+* **Timeouts** — `setTimeout()` terminates a stuck process and throws the new `ProcessTimeoutException`.
+* **PSR-3 logging** — `setLogger()` logs the generated command, stderr and failures. Adds a `psr/log` dependency.
+* `version()` exposes the OCRmyPDF version on the fluent object.
+
+### Changed
+
+* **Process execution no longer spawns a shell.** The command is passed to `proc_open()` as an argument vector,
+  eliminating quoting/escaping issues and shell-injection risk in parameter values.
+* **Success is now determined by the process exit code** (with OCRmyPDF's documented exit-code meanings in error
+  messages), instead of scanning stderr for the word "ERROR".
+* `setInputData()` derives the byte length automatically; the size argument is now optional.
+* Minimum PHP version raised to `^8.2` (matches the CI matrix).
+
+### Fixed
+
+* Stdout output is fully drained after the process exits, fixing truncation of large payloads (e.g. PDF data
+  returned via stdin/stdout mode).
+* `wait()` no longer busy-loops a CPU core; it uses `stream_select()`.
+* On failure, only internally generated temp files are deleted — a caller-supplied output path is never removed.
+* Recursive directory creation in `checkWritePermissions()`; orphaned `tempnam()` stub files are cleaned up.
+* Removed a duplicated cleanup block in temp-file handling.
+
 ## v1.0.0 - 2025-10-08
 
 > [!IMPORTANT]

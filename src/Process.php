@@ -23,17 +23,29 @@ class Process
     private mixed $handle;
 
     /**
+     * Maximum runtime in seconds before the process is terminated, or null for
+     * no limit.
+     */
+    private ?float $timeout;
+
+    /**
+     * @param list<string>|string $command Argument vector (preferred) or, for
+     *   testing only, a command string. The array form is passed straight to
+     *   proc_open() so no shell is involved.
+     * @param float|null $timeout Maximum runtime in seconds, or null for none.
      * @throws UnsuccessfulCommandException
      */
-    public function __construct(string $commandString)
+    public function __construct(array|string $command, ?float $timeout = null)
     {
+        $this->timeout = $timeout;
+
         $streamDescriptors = [
             ["pipe", "r"],
             ["pipe", "w"],
             ["pipe", "w"]
         ];
         $this->handle = proc_open(
-            command: $commandString,
+            command: $command,
             descriptor_spec: $streamDescriptors,
             pipes: $pipes,
             cwd: NULL,
@@ -52,7 +64,7 @@ class Process
             $this->stderr = $pipes[2];
         }
 
-        self::checkProcessCreation($this->handle, $commandString);
+        self::checkProcessCreation($this->handle, self::describe($command));
 
         //This can avoid deadlock on some cases (when stderr buffer is filled up before writing to stdout and vice versa)
         if (is_resource($this->stdout)) {
@@ -61,6 +73,14 @@ class Process
         if (is_resource($this->stderr)) {
             stream_set_blocking($this->stderr, false);
         }
+    }
+
+    /**
+     * @param list<string>|string $command
+     */
+    private static function describe(array|string $command): string
+    {
+        return is_array($command) ? join(' ', $command) : $command;
     }
 
     /**
@@ -100,13 +120,18 @@ class Process
     }
 
     /**
-     * @return array<string, string>
+     * Block until the process exits (or the timeout elapses), draining stdout
+     * and stderr without busy-waiting.
+     *
+     * @return array{out: string, err: string, exitCode: int|null, timedOut: bool}
      */
     public function wait(): array
     {
         $data = [
             "out" => "",
-            "err" => ""
+            "err" => "",
+            "exitCode" => null,
+            "timedOut" => false,
         ];
 
         if (is_resource($this->stdout) === false
@@ -116,14 +141,91 @@ class Process
             return $data;
         }
 
-        $running = true;
-        while ($running === true) {
-            $data["out"] .= fread($this->stdout, 8192);
-            $data["err"] .= fread($this->stderr, 8192);
-            $procInfo = proc_get_status($this->handle);
-            $running = $procInfo["running"];
+        $deadline = $this->timeout !== null ? microtime(true) + $this->timeout : null;
+
+        while (true) {
+            if ($deadline !== null) {
+                $remaining = $deadline - microtime(true);
+                if ($remaining <= 0) {
+                    $this->terminate();
+                    $data["timedOut"] = true;
+                    break;
+                }
+                $tick = min($remaining, 0.2);
+            } else {
+                $tick = 0.2;
+            }
+
+            $read = [$this->stdout, $this->stderr];
+            $write = $except = null;
+            $sec = (int)floor($tick);
+            $usec = (int)round(($tick - $sec) * 1_000_000);
+            $ready = @stream_select($read, $write, $except, $sec, $usec);
+
+            if ($ready === false) {
+                // Interrupted (e.g. by a signal); retry.
+                continue;
+            }
+
+            foreach ($read as $stream) {
+                $chunk = fread($stream, 8192);
+                if ($chunk === false) continue;
+                if ($stream === $this->stdout) {
+                    $data["out"] .= $chunk;
+                } else {
+                    $data["err"] .= $chunk;
+                }
+            }
+
+            $status = proc_get_status($this->handle);
+            if ($status["running"] === false) {
+                // exitcode is only valid the first time running flips to false.
+                $data["exitCode"] = $status["exitcode"] === -1 ? null : $status["exitcode"];
+                break;
+            }
         }
+
+        // Final drain: data may remain buffered in the pipes after the process
+        // exits. Without this, large stdout payloads (e.g. PDF data) truncate.
+        $data["out"] .= $this->drain($this->stdout);
+        $data["err"] .= $this->drain($this->stderr);
+
         return $data;
+    }
+
+    /**
+     * @param resource|null $stream
+     */
+    private function drain($stream): string
+    {
+        $buffer = "";
+        if (is_resource($stream)) {
+            while (($chunk = fread($stream, 8192)) !== false && $chunk !== '') {
+                $buffer .= $chunk;
+            }
+        }
+        return $buffer;
+    }
+
+    /**
+     * Terminate the running process: SIGTERM, then SIGKILL if it lingers.
+     */
+    private function terminate(): void
+    {
+        if (is_resource($this->handle) === false) {
+            return;
+        }
+        proc_terminate($this->handle);
+
+        $deadline = microtime(true) + 1.0;
+        while (microtime(true) < $deadline) {
+            $status = proc_get_status($this->handle);
+            if ($status["running"] === false) {
+                return;
+            }
+            usleep(50_000);
+        }
+        proc_terminate($this->handle, 9);
     }
 
     public function closeStreams(?string $stream = null): self

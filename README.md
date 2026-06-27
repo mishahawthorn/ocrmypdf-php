@@ -104,9 +104,73 @@ OCRmyPDF::make('document.pdf')
     ->run();
 ```
 
+### extractText / getText
+
+Write the recognized plaintext to a sidecar file and read it back after `run()`. Call `extractText()` with no
+argument to use a temporary file that is read and discarded, or pass a path to keep the text file.
+
+```php
+use mishahawthorn\OCRmyPDF\OCRmyPDF;
+
+$ocr = OCRmyPDF::make('document.pdf')
+    ->language('eng')
+    ->extractText();
+
+$pdfPath = $ocr->run();
+$text = $ocr->getText(); //Recognized plaintext
+```
+
+### Convenience setters
+
+Thin, type-safe wrappers over the most common `ocrmypdf` parameters. Each is equivalent to the matching
+`setParam` call.
+
+```php
+use mishahawthorn\OCRmyPDF\OCRmyPDF;
+
+OCRmyPDF::make('document.pdf')
+    ->language('eng', 'deu') // -l eng+deu
+    ->deskew()               // --deskew
+    ->rotatePages()          // --rotate-pages
+    ->clean()                // --clean
+    ->removeBackground()     // --remove-background
+    ->optimize(3)            // --optimize 3 (0-3)
+    ->skipText()             // --skip-text  (or ->forceOcr() / ->redoOcr())
+    ->setThreadLimit(4)      // --jobs 4
+    ->setTempDir('/var/tmp')
+    ->run();
+```
+
+Boolean setters accept `false` to remove the flag, e.g. `->deskew(false)`.
+
+### setTimeout
+
+Terminate the `ocrmypdf` process if it runs longer than the given number of seconds. A
+`ProcessTimeoutException` is thrown when the limit is exceeded.
+
+```php
+use mishahawthorn\OCRmyPDF\OCRmyPDF;
+
+OCRmyPDF::make('document.pdf')
+    ->setTimeout(120) //seconds
+    ->run();
+```
+
+### setLogger
+
+Attach any [PSR-3][] logger to receive the generated command, stderr output and any failures.
+
+```php
+use mishahawthorn\OCRmyPDF\OCRmyPDF;
+
+OCRmyPDF::make('document.pdf')
+    ->setLogger($psr3Logger)
+    ->run();
+```
+
 ## License
 
-ocrmypdf-php is released under the [AGPL-3.0 License][].
+ocrmypdf-php is released under the [MIT License][].
 
 ## Credits
 
@@ -117,7 +181,9 @@ developed by [thiagoalessio][] and associated contributors.
 
 [OCRmyPDF]: https://github.com/jbarlow83/OCRmyPDF
 
-[AGPL-3.0 License]: https://github.com/mishahawthorn/ocrmypdf-php/blob/main/LICENSE
+[PSR-3]: https://www.php-fig.org/psr/psr-3/
+
+[MIT License]: https://github.com/mishahawthorn/ocrmypdf-php/blob/main/LICENSE
 
 [tesseract-ocr-for-php]: https://github.com/thiagoalessio/tesseract-ocr-for-php
 
