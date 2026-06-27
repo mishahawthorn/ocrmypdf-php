@@ -8,7 +8,7 @@
     "ocr",
     "php"
   ],
-  "license": "AGPL-3.0-only",
+  "license": "MIT",
   "authors": [
     {
       "name": "mishahawthorn",
@@ -20,7 +20,8 @@
     "source": "https://github.com/mishahawthorn/ocrmypdf-php"
   },
   "require": {
-    "php": "^8.0"
+    "php": "^8.2",
+    "psr/log": "^1.0 || ^2.0 || ^3.0"
   },
   "require-dev": {
     "phpunit/php-code-coverage": "^11.0.0",
